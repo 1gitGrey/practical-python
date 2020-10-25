@@ -3,38 +3,30 @@
 # Exercise 2.4
 
 # __file__ = 'Data/portfolio.csv'
-
-
-
+import csv 
+import os
+import re
+import sys
 # reads portfolio files 
 # define fn read_portfolio(filename)
 # list of tuples is output
+#portfolio = []
+portfolio = {}
 
-portfolio = []
+def read_portfolio(filename):
 
+	with open(filename, 'rt') as file:
+		rows = csv.reader(file)
+		headers = next(rows)
+		for row in rows:
+			#holding = (row[0], int(row[1]), float(row[2]))
+			#portfolio.append(holding)
+			portfolio["name"] = row[0]
+			portfolio["shares"] = int(row[1])
+			portfolio["price"] = float(row[2])
+			nshares = int(row[1])
+			price = float(row[2])
+			cost = nshares * price 
 
-def read_portfolio(filename): 
+	return portfolio
 
-	for row in rows:
-		holding = (row[0], int(row[1]), float(row[2]))
-		portfolio.append(holding)
-
-		
-		
- 
-
-
-import csv
-
-def portfolio_cost(filename):
-    '''Computes the total cost (shares*price) of a portfolio file'''
-    total_cost = 0.0
-
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            nshares = int(row[1])
-            price = float(row[2])
-            total_cost += nshares * price
-    return total_cost
